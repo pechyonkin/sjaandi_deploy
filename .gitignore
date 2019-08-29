@@ -18,3 +18,6 @@ dummy.png
 
 # Notebooks
 *.ipynb
+__pycache__
+notebooks
+.coverage
