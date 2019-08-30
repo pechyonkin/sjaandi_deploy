@@ -18,7 +18,7 @@ class InvalidParameterValueError(Exception):
     pass
 
 
-APP_ADDRESS = 'http://localhost:5000/'
+APP_ADDRESS = 'http://0.0.0.0:5000/'
 
 
 def save_random_image(full_name: str,
@@ -92,7 +92,7 @@ def make_folder_with_files(extension: str = '.jpg', n_files=5, file_type: str = 
     return temp_dir
 
 
-def get_browser(headed=True) -> Chrome:
+def get_browser(headed=False) -> Chrome:
     chrome_options = Options()
     if not headed:
         chrome_options.add_argument('--headless')
@@ -119,9 +119,12 @@ def test_true():
 
 def test_get_homepage(browser_headed: Chrome):
     browser_headed.get(APP_ADDRESS)
+    print(browser_headed.page_source)
+    assert browser_headed.current_url == APP_ADDRESS
 
 def test_click_upload_and_nothing_happens(browser_headed: Chrome):
     browser_headed.get(APP_ADDRESS)
+    print(browser_headed.page_source)
     upload_button = browser_headed.find_element_by_id("upload")
     upload_button.click()
     # self.browser.current_url -> http://localhost:5000/
@@ -130,6 +133,7 @@ def test_click_upload_and_nothing_happens(browser_headed: Chrome):
 def test_can_get_collage_with_thirty_valid_images(browser_headed):
     # get the front page of app
     browser_headed.get(APP_ADDRESS)
+    print(browser_headed.page_source)
 
     # create some temporary files
     folder = make_folder_with_files(file_type='image', n_files=30)
