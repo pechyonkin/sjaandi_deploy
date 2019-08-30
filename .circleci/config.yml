@@ -1,0 +1,54 @@
+# Python CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-python/ for more details
+#
+version: 2
+jobs:
+  build:
+    machine:
+      image: circleci/classic:201808-01
+
+    working_directory: ~/sjaandi_deploy
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v2-dependencies-{{ checksum "requirements.txt" }}
+
+      - run:
+          name: Set Python Version
+          command: pyenv global 3.7.0
+
+      - run:
+          name: Install Testing Dependencies
+          command: |
+            pip install -r requirements-circleci.txt
+
+      - run:
+          name: Build And Spin Up Flask App
+          command: |
+            docker-compose up -d
+            docker ps
+
+      - save_cache:
+          paths:
+            - ./venv
+          key: v2-dependencies-{{ checksum "requirements.txt" }}
+
+      - run:
+          name: Run Tests
+          command: |
+            pytest tests/ -svv
+
+      - store_artifacts:
+          path: test-reports
+          destination: test-reports
+
+workflows:
+  version: 2
+  build_workflow:
+    jobs:
+      - build
