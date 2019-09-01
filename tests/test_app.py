@@ -149,7 +149,7 @@ def test_can_get_collage_with_thirty_valid_images(browser_headed):
     upload_button.click()
 
     # wait from here
-    wait = WebDriverWait(browser_headed, 10)
+    wait = WebDriverWait(browser_headed, 120)
     wait.until(lambda browser: browser.current_url != APP_ADDRESS)
     # behold of the beautiful result!
 
