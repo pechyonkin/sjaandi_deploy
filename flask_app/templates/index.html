@@ -1,27 +1,32 @@
 {% extends 'base.html' %}
 
 {% block head %}
-    <title>Sjaandi Deploy</title>
+    <title>Sjaandi</title>
     {{ dropzone.load_css() }}
 {% endblock head %}
 
 {% block body %}
 
-    <div class="page-header">
-        <h1 class="display-4">Sjaandi Collage Maker</h1>
-    </div>
     <div class="jumbotron">
-        <ul>
-            <li>Select images and click "Upload".</li>
-            <li>Up to {{ max_images }} images can be uploaded.</li>
-            <li>Image size up to {{ max_file_size }} MB.</li>
-        </ul>
-        <p>
+        <h2>
+            Sjaandi
+            <small class="text-muted">AI-Powered Collage Maker</small>
+        </h2>
+        <div>
+            <p>
+                Unleash the power of neural nets to create awesome collages. Visually similar images will be located
+                close to each other. See examples and technical details <a href="https://github.com/pechyonkin/sjaandi#sjaandi--">here</a>.
+            </p>
+            <ul class="list">
+                <li>Select images and click "Upload".</li>
+                <li>Up to {{ max_images }} images can be uploaded.</li>
+                <li>Image size up to {{ max_file_size }} MB.</li>
+            </ul>
+        </div>
+        <div class="zone">
             {{ dropzone.create(action='/') }}
-        </p>
-        <p>
-            <button id="upload" class="btn btn-primary btn-lg" type="submit">Upload</button>
-        </p>
+        </div>
+        <button id="upload" class="btn btn-primary btn-lg" type="submit">Upload</button>
     </div>
 
     {{ dropzone.load_js() }}
