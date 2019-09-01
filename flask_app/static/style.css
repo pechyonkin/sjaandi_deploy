@@ -12,10 +12,33 @@
     padding-bottom: 10px;
 }
 
+.jumbotron {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
 .img-fluid {
     margin-left: auto;
     margin-right: auto;
     display: block;
     padding: 0px;
+}
+
+.list {
+    margin-bottom: 10px;
+}
+
+#upload {
+    margin-top: 20px;
+}
+
+.zone {
+    margin-top: 15px;
+}
+
+.collage-header {
+    margin-bottom: 15px;
 }
 
